@@ -213,4 +213,43 @@ const flatten = (array) => {
 
 // 8. capitalizeFirst: write a recursion function. Given an arrat of strings, capitalize the first letter of each string in the array
 
-const capitalizeFirst = (arr) => {};
+const capitalizeFirst = (array) => {
+  if (array.length === 0) {
+    return [];
+  }
+
+  const capitalizedString = array[0][0].toUpperCase() + array[0].slice(1);
+  return [capitalizedString].concat(capitalizeFirst(array.slice(1)));
+};
+
+//console.log(capitalizeFirst(["car", "taco", "banana"]));
+
+// 9. nestedEvenSum: Return the sum of all even numbers in an object which may contain nested objects.
+
+const nestedEvenSum = (obj) => {
+  let sum = 0;
+
+  function helper(innerObj) {
+    for (let key in innerObj) {
+      if (typeof innerObj[key] === "object") {
+        helper(innerObj[key]);
+      } else if (typeof innerObj[key] === "number" && innerObj[key] % 2 === 0) {
+        sum += innerObj[key];
+      }
+    }
+  }
+
+  helper(obj);
+  return sum;
+};
+
+// 10. Given an array of words, return a new array containing each word capitalized.
+
+const capitalizeWords = (array) => {
+  if (array.length === 1) {
+    return [array[0].toUpperCase()];
+  }
+  let res = capitalizeWords(array.slice(0, -1));
+  res.push(array.slice(array.length - 1)[0].toUpperCase());
+  return res;
+};
